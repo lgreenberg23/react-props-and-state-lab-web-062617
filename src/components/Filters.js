@@ -1,16 +1,24 @@
 import React from 'react';
 
 class Filters extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+    this.props = props 
+    // this.state = {value: 'all'}
   }
+
+  handleChange = (event) => this.props.onChangeType(event.target.value)
+    // this.setState({value: event.target.value})
+
+  // handleClick = (juice) => this.props.onFindPetsClick(juice.target.value)
 
   render() {
     return (
       <div className="ui form">
         <h3>Animal type</h3>
         <div className="field">
-          <select name="type" id="type">
+          <select onChange={this.handleChange} name="type" id="type" value={this.props.filters.type}>
             <option value="all">All</option>
             <option value="cat">Cats</option>
             <option value="dog">Dogs</option>
@@ -19,7 +27,7 @@ class Filters extends React.Component {
         </div>
 
         <div className="field">
-          <button className="ui secondary button">Find pets</button>
+          <button className="ui secondary button" onClick={this.props.onFindPetsClick}>Find pets</button>
         </div>
       </div>
     );
